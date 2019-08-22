@@ -1,0 +1,41 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+<div class="container">
+
+    <article class="col-12  col-md-7 todo-article">
+        <header class="">
+            <img src="{{ object.author.profile.image.url }}">
+            <div>
+                <h2>{{object}}</h2>
+                <span>{{ object.author }}</span>
+                <span>{{ object.created |date:" d E Y" }}</span>
+            </div>
+
+        </header>
+        <div class="todo_detail-buttons">
+            {% if object.author == user %}
+            <a
+                class="btn btn-outline-info"
+                role="button"
+                href="{% url 'todo:todo_edit' todolist_pk=object.pk %}">
+                EDYTUJ
+            </a>
+            <a
+                class="btn btn-outline-danger"
+                role="button"
+                href="{% url 'todo:todo_delete_all' todolist_pk=object.pk %}">
+                USUŃ LISTĘ
+            </a>
+            {% endif %}
+        </div>
+        {% for do in object.todo_set.all %}
+        <p>{{ do.text }}</p>
+        {% endfor %}
+
+    </article>
+
+
+</div>
+
+{% endblock content %}

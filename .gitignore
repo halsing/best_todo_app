@@ -1,0 +1,9 @@
+*.sqlite3
+*.pyc
+
+media/profile_image/*
+todo/migrations/*
+users/migrations/*
+.idea
+
+best_todo_app/settings/local_settings.py

@@ -1,0 +1,61 @@
+{% extends "todo/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+
+
+    <div class="row">
+
+            <div class=" col-md-6 profile_header">
+                <img src="{{ user.profile.image.url }}" >
+                <h2 class="col-12 text-center">{{ user.username }}</h2>
+                <div class="  profile_info">
+                    <form method="post" class=""
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4">
+                                Profile info
+                                {{ u_form|crispy }}
+                                {{ p_form|crispy }}
+                            </legend>
+                        </fieldset>
+
+                        <div class="">
+                            <button type="submit" class="btn btn-outline-info">
+                                Update
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        <div class="col-md-6">
+        {% for todo in todo_list %}
+            <article class="col-12 todo-article">
+                <header class="">
+                    <img src="{{ todo.author.profile.image.url }}">
+                    <div>
+                        <a href="{% url 'todo:todo-detail' todo.pk %}">
+                            <h2>{{todo}}</h2>
+                        </a>
+                        <span>{{ todo.author }}</span>
+                        <span>{{ todo.created |date:" d E Y" }}</span>
+                    </div>
+
+                </header>
+                {% for do in todo.todo_set.all %}
+                <p>{{ do.text }}</p>
+                {% endfor %}
+
+            </article>
+        {% endfor%}
+        </div>
+
+
+    </div>
+</div>
+
+
+{% endblock content %}

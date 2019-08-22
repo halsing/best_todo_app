@@ -1,0 +1,25 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+<div class="container">
+
+    {% for todo in todo_list %}
+    <article class="col-12  col-md-7 todo-article">
+        <header class="">
+            <img src="{{ todo.author.profile.image.url }}">
+            <div>
+                <a href="{% url 'todo:todo-detail' todo.pk %}"><h2>{{todo}}</h2></a>
+                <span>{{ todo.author }}</span>
+                <span>{{ todo.created |date:" d E Y" }}</span>
+            </div>
+
+        </header>
+        {% for do in todo.todo_set.all %}
+        <p>{{ do.text }}</p>
+        {% endfor %}
+
+    </article>
+    {% endfor%}
+</div>
+
+{% endblock content %}

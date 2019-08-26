@@ -3,18 +3,18 @@ from PIL import Image
 from django.test import TestCase
 from django.core.files.base import File
 from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
+
 
 from users.models import Profile
 
 
-# def create_test_image(
-#         name='test.jpg', ext='JPEG', size=(1600, 1500), color=(256, 0, 0)):
-#     file_obj = BytesIO()
-#     image = Image.new("RGB", size=size, color=color)
-#     image.save(file_obj, ext)
-#     file_obj.seek(0)
-#     return File(file_obj, name=name)
+def create_test_image(
+        name='test.jpg', ext='JPEG', size=(1600, 1500), color=(256, 0, 0)):
+    file_obj = BytesIO()
+    image = Image.new("RGB", size=size, color=color)
+    image.save(file_obj, ext)
+    file_obj.seek(0)
+    return File(file_obj, name=name)
 
 
 class TestProfileModels(TestCase):

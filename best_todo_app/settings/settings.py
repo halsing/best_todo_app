@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG_MODE')
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS')
+ALLOWED_HOSTS = ['simpledjangotodoapp.herokuapp.com']
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

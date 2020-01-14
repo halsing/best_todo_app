@@ -13,7 +13,7 @@ class TodoList(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('todo:todo-detail', kwargs={'pk': self.pk})
+        return reverse("todo:todo-detail", kwargs={"pk": self.pk})
 
 
 class Todo(models.Model):

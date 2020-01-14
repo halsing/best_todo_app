@@ -11,19 +11,20 @@ from .models import TodoList, Todo
 
 # Create your views here.
 
+
 def index(request):
     todo_list = TodoList.objects.all()
     context = {
         "todo_list": todo_list,
     }
-    return render(request, 'todo/index.html', context)
+    return render(request, "todo/index.html", context)
 
 
 class TodoListView(ListView):
     model = TodoList
-    template_name = 'todo/index.html'
+    template_name = "todo/index.html"
     context_object_name = "todo_list"
-    ordering = ['-created']
+    ordering = ["-created"]
 
 
 class TodoDetailView(DetailView):
@@ -32,15 +33,16 @@ class TodoDetailView(DetailView):
 
 class TodoListCreateView(CreateView):
     model = TodoList
-    fields = ['name', ]
+    fields = [
+        "name",
+    ]
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('todo:todo_edit',
-                            kwargs={'todolist_pk': self.object.pk})
+        return reverse_lazy("todo:todo_edit", kwargs={"todolist_pk": self.object.pk})
 
 
 @require_POST
@@ -51,10 +53,7 @@ def todo_add(request, todolist_pk):
 
     if todolist.author == request.user:
         if form.is_valid():
-            new_todo = Todo(
-                text=request.POST['text'],
-                todo_list=todolist,
-            )
+            new_todo = Todo(text=request.POST["text"], todo_list=todolist,)
             new_todo.save()
 
     return redirect(f"/edit_todo/{todolist_pk}")
@@ -65,8 +64,8 @@ def todo_edit(request, todolist_pk):
     todolist = TodoList.objects.get(pk=todolist_pk)
     todo_form = TodoForm
     context = {
-        'todo_list': todolist,
-        'form': todo_form,
+        "todo_list": todolist,
+        "form": todo_form,
     }
     return render(request, "todo/edit.html", context)
 
@@ -115,8 +114,7 @@ def todo_delete_all(request, todolist_pk):
 
     if todolist.author == request.user:
         messages.success(
-            request,
-            f'Twoja lista o tytule "{todolist.name}" została usunięta!'
+            request, f'Twoja lista o tytule "{todolist.name}" została usunięta!'
         )
         todolist.delete()
     return redirect("todo:todo-home")

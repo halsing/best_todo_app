@@ -1,6 +1,10 @@
 *.sqlite3
 *.pyc
 
+venv_best_todo
+.vscode/*
+__pycache__
+
 media/profile_image/*
 todo/migrations/*
 users/migrations/*

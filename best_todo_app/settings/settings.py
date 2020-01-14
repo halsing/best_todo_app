@@ -113,7 +113,6 @@ STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 
 ENV_PATH = os.path.abspath(os.path.dirname(__file__))
-print(ENV_PATH)
 STATIC_ROOT = os.path.join(ENV_PATH, "../../public/static/")
 MEDIA_ROOT = os.path.join(ENV_PATH, "../../public/media/")
 

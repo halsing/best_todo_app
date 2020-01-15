@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,7 +41,7 @@ INSTALLED_APPS = [
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG_MODE')
 
-ALLOWED_HOSTS = ['simpledjangotodoapp.herokuapp.com']
+ALLOWED_HOSTS = ['simpledjangotodoapp.herokuapp.com','127.0.0.1']
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -70,10 +71,21 @@ TEMPLATES = [
     },
 ]
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'best_todo_app',
+#         'USER': os.environ.get('POSTGRES_LOCAL_USER'),
+#         'PASSWORD': os.environ.get('POSTGRES_LOCAL_PASSWORD'),
+#         'HOST': os.environ.get('POSTGRES_LOCAL_HOST'),
+#         'PORT': os.environ.get('POSTGRES_LOCAL_PORT') or '',
+#     }
+# }
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "../db.sqlite3"),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -126,3 +138,6 @@ try:
     from .local_settings import *
 except ImportError:
     pass
+
+
+django_heroku.settings(locals())
